@@ -300,7 +300,6 @@
               <p class="brand-subtitle">меню, покупки и готовка без суеты</p>
             </div>
           </div>
-          <div class="storage-pill">PWA · локальный режим · Supabase готовится</div>
         </header>
         <main class="page">
           ${renderHome()}
@@ -973,19 +972,8 @@
       });
     });
     document.querySelectorAll(".dialog-backdrop.active").forEach((backdrop) => {
-      backdrop.addEventListener("click", (event) => {
-        if (event.target !== backdrop) return;
-        if (backdrop.id === "recipe-dialog") {
-          activeRecipeId = null;
-          cookingStep = 0;
-        }
-        if (backdrop.id === "add-menu-dialog") addMenuRecipeId = null;
-        if (backdrop.id === "add-recipe-dialog") {
-          addRecipeMode = null;
-          recipeDraft = null;
-        }
-        if (backdrop.id === "add-history-dialog") historyRecipeId = null;
-        render();
+      backdrop.addEventListener("pointerdown", (event) => {
+        if (event.target === backdrop) closeDialogById(backdrop.id);
       });
     });
 
@@ -1379,6 +1367,20 @@
     saveState();
     render();
     toast("Неделя очищена.");
+  }
+
+  function closeDialogById(dialogId) {
+    if (dialogId === "recipe-dialog") {
+      activeRecipeId = null;
+      cookingStep = 0;
+    }
+    if (dialogId === "add-menu-dialog") addMenuRecipeId = null;
+    if (dialogId === "add-recipe-dialog") {
+      addRecipeMode = null;
+      recipeDraft = null;
+    }
+    if (dialogId === "add-history-dialog") historyRecipeId = null;
+    render();
   }
 
   function renderSourceBadge(sourceType) {

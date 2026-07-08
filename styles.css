@@ -18,7 +18,7 @@
   --app-border: var(--line);
   --app-border-soft: var(--line);
   --app-shadow-card: var(--shadow);
-  --app-font-main: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --app-font-main: Manrope, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --app-font-heading: var(--app-font-main);
   --person-artem: #f97316;
   --person-tyoma: #22c55e;
@@ -43,7 +43,7 @@
 html {
   background: var(--bg);
   color: var(--text);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--app-font-main);
 }
 
 body {
@@ -151,7 +151,8 @@ button {
 .view-title h1 {
   margin: 0;
   color: var(--text);
-  font-size: clamp(22px, 5vw, 34px);
+  font-size: clamp(21px, 4vw, 32px);
+  line-height: 1.12;
   letter-spacing: 0;
 }
 
@@ -1209,6 +1210,10 @@ button {
 }
 
 @media (max-width: 620px) {
+  .app {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+
   .topbar {
     padding: 10px 12px;
   }
@@ -1222,6 +1227,24 @@ button {
     padding-inline: 12px;
   }
 
+  .section-head {
+    gap: 8px;
+    margin: 16px 0 10px;
+  }
+
+  .section-head h2,
+  .view-title h1 {
+    font-size: 22px;
+    line-height: 1.12;
+  }
+
+  .section-head p,
+  .view-title p {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
   .today-photo {
     min-height: 190px;
   }
@@ -1231,7 +1254,8 @@ button {
   }
 
   .today-content h1 {
-    font-size: 30px;
+    font-size: 28px;
+    line-height: 1.08;
   }
 
   .quick-panel {
@@ -1288,18 +1312,32 @@ button {
   }
 
   .recipe-actions .primary {
-    min-height: 42px;
+    min-height: 40px;
     padding-inline: 8px;
     font-size: 13px;
   }
 
   .recipe-actions .action-mini {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
   }
 
   .recipe-body {
-    padding: 16px;
+    padding: 15px;
+  }
+
+  .recipe-body h3 {
+    font-size: 24px;
+    line-height: 1.14;
+  }
+
+  .recipe-card-description {
+    font-size: 17px;
+    line-height: 1.42;
+  }
+
+  .loved-by {
+    font-size: 15px;
   }
 
   .person-rating-row {
@@ -1307,9 +1345,9 @@ button {
   }
 
   .person-chip {
-    min-height: 34px;
+    min-height: 32px;
     padding: 5px 8px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .menu-actions,
@@ -1320,9 +1358,9 @@ button {
 
   .menu-actions button,
   .shopping-actions button {
-    min-height: 42px;
-    padding-inline: 12px;
-    font-size: 13px;
+    min-height: 38px;
+    padding: 8px 10px;
+    font-size: 12px;
   }
 
   .menu-grid {
@@ -1357,13 +1395,42 @@ button {
   }
 
   .shopping-row {
-    grid-template-columns: 32px minmax(0, 1fr) 72px 70px 40px;
-    gap: 6px;
+    grid-template-columns: 28px minmax(0, 1fr) 58px 52px 34px;
+    gap: 5px;
+    padding: 6px 0;
+    font-size: 12px;
   }
 
   .shopping-row input,
   .shopping-row select {
-    padding-inline: 7px;
+    min-height: 36px;
+    padding: 7px 6px;
+    font-size: 12px;
+  }
+
+  .shopping-row .icon-button {
+    width: 34px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .bottom-nav {
+    gap: 3px;
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+  }
+
+  .nav-button {
+    min-height: 48px;
+    gap: 1px;
+    padding: 4px 2px;
+    border-radius: 7px;
+    font-size: 10px;
+    font-weight: 800;
+    line-height: 1.05;
+  }
+
+  .nav-button .nav-icon {
+    font-size: 18px;
   }
 
   .dialog-backdrop {

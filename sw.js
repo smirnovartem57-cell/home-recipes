@@ -1,4 +1,4 @@
-const CACHE_NAME = "home-recipes-pwa-v2";
+const CACHE_NAME = "home-recipes-pwa-v3";
 const APP_SHELL = [
   "./",
   "./index.html",

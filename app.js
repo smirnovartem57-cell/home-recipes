@@ -740,14 +740,15 @@
     return `
       <div class="dialog-backdrop active" id="recipe-dialog">
         <article class="dialog large">
-          <div class="dialog-hero" style="background-image:url('${escapeAttr(recipe.image_url)}')"></div>
+          <div class="dialog-hero" style="background-image:url('${escapeAttr(recipe.image_url)}')">
+            <button class="icon-button dialog-close-float" data-close-dialog aria-label="Закрыть рецепт">×</button>
+          </div>
           <div class="dialog-body">
             <div class="dialog-title-row">
               <div>
                 <p class="eyebrow">${escapeHtml(recipe.category)}</p>
                 <h2>${escapeHtml(recipe.title)}</h2>
               </div>
-              <button class="icon-button" data-close-dialog>×</button>
             </div>
             <p>${escapeHtml(recipe.description)}</p>
             <div class="chips">${renderSourceBadge(recipe.source_type)}${recipe.source_url ? `<a class="source-link" href="${escapeAttr(recipe.source_url)}" target="_blank" rel="noreferrer">Источник</a>` : ""}</div>
@@ -968,6 +969,22 @@
       button.addEventListener("click", () => {
         activeRecipeId = null;
         cookingStep = 0;
+        render();
+      });
+    });
+    document.querySelectorAll(".dialog-backdrop.active").forEach((backdrop) => {
+      backdrop.addEventListener("click", (event) => {
+        if (event.target !== backdrop) return;
+        if (backdrop.id === "recipe-dialog") {
+          activeRecipeId = null;
+          cookingStep = 0;
+        }
+        if (backdrop.id === "add-menu-dialog") addMenuRecipeId = null;
+        if (backdrop.id === "add-recipe-dialog") {
+          addRecipeMode = null;
+          recipeDraft = null;
+        }
+        if (backdrop.id === "add-history-dialog") historyRecipeId = null;
         render();
       });
     });

@@ -767,6 +767,7 @@ button {
 }
 
 .dialog {
+  position: relative;
   width: min(840px, 100%);
   max-height: min(88vh, 900px);
   overflow: auto;
@@ -780,9 +781,29 @@ button {
 }
 
 .dialog-hero {
-  min-height: 300px;
+  position: relative;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  max-height: 420px;
   background-position: center;
   background-size: cover;
+}
+
+.dialog-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.18), transparent 34%, rgba(17, 24, 39, 0.1));
+  pointer-events: none;
+}
+
+.dialog-close-float {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 26px rgba(17, 24, 39, 0.2);
 }
 
 .dialog-body {
@@ -1316,5 +1337,15 @@ button {
   .dialog {
     max-height: 94vh;
     border-radius: 8px 8px 0 0;
+  }
+
+  .dialog-hero {
+    aspect-ratio: 4 / 3;
+    max-height: 280px;
+  }
+
+  .dialog-close-float {
+    top: 10px;
+    right: 10px;
   }
 }

@@ -1,6 +1,15 @@
 (function () {
   "use strict";
 
+  const SUPABASE_URL = "https://cqkfooisefbfucevfnsj.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_4fpB7_UhothlbolE5dktcg_SdxvXcRe";
+  const APP_STATE_ID = "home-recipes-state";
+  const supabaseClient = window.supabase
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+  let remoteSaveTimer = null;
+  let remoteReady = false;
+
   const PRODUCT_CATEGORIES = [
     "овощи и зелень",
     "фрукты",
@@ -221,7 +230,7 @@
   const todayIso = toIsoDate(today);
   const initialWeek = startOfWeek(today);
 
-  const state = loadState();
+  let state = loadState();
   let activeView = "home";
   let activeRecipeId = null;
   let cookingStep = 0;
@@ -287,6 +296,61 @@
 
   function saveState() {
     localStorage.setItem("homeRecipesState", JSON.stringify(state));
+    queueRemoteSave();
+  }
+
+  function saveLocalStateOnly() {
+    localStorage.setItem("homeRecipesState", JSON.stringify(state));
+  }
+
+  async function initializeRemoteState() {
+    if (!supabaseClient) return;
+
+    try {
+      const { data, error } = await supabaseClient
+        .from("app_state")
+        .select("data")
+        .eq("id", APP_STATE_ID)
+        .maybeSingle();
+
+      if (error) throw error;
+
+      if (data?.data) {
+        state = normalizeState(data.data);
+        saveLocalStateOnly();
+        render();
+        toast("Данные синхронизированы.");
+      } else {
+        await saveRemoteState();
+      }
+
+      remoteReady = true;
+    } catch (error) {
+      console.warn("Supabase sync disabled", error);
+      toast("Облачное хранение пока недоступно, работаем локально.");
+    }
+  }
+
+  function queueRemoteSave() {
+    if (!supabaseClient) return;
+    clearTimeout(remoteSaveTimer);
+    remoteSaveTimer = setTimeout(() => {
+      saveRemoteState().catch((error) => console.warn("Supabase save failed", error));
+    }, remoteReady ? 500 : 1200);
+  }
+
+  async function saveRemoteState() {
+    if (!supabaseClient) return;
+
+    const { error } = await supabaseClient
+      .from("app_state")
+      .upsert({
+        id: APP_STATE_ID,
+        data: state,
+        updated_at: new Date().toISOString()
+      });
+
+    if (error) throw error;
   }
 
   function render() {
@@ -1833,4 +1897,5 @@
   }
 
   render();
+  initializeRemoteState();
 })();

@@ -1,14 +1,16 @@
 :root {
-  --bg: #fff8ef;
-  --accent: #f97316;
-  --accent-dark: #c2410c;
-  --green: #22c55e;
-  --text: #1f2937;
-  --muted: #6b7280;
+  --bg: #f7f4ee;
+  --accent: #ea580c;
+  --accent-dark: #9a3412;
+  --green: #16a34a;
+  --blue: #2563eb;
+  --text: #18212f;
+  --muted: #667085;
   --card: #ffffff;
-  --line: #e5e7eb;
-  --soft: #ffedd5;
-  --shadow: 0 18px 44px rgba(124, 45, 18, 0.12);
+  --line: #e2e8f0;
+  --soft: #fff1e6;
+  --shadow: 0 18px 44px rgba(15, 23, 42, 0.1);
+  --shadow-hover: 0 22px 54px rgba(15, 23, 42, 0.15);
   --app-primary: var(--accent);
   --app-primary-soft: var(--soft);
   --app-secondary: var(--green);
@@ -44,14 +46,16 @@ html {
   background: var(--bg);
   color: var(--text);
   font-family: var(--app-font-main);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 10% 0%, rgba(249, 115, 22, 0.09), transparent 32rem),
-    linear-gradient(180deg, #fff8ef 0%, #fffaf5 48%, #f8fafc 100%);
+    linear-gradient(135deg, rgba(234, 88, 12, 0.1), transparent 36%),
+    linear-gradient(180deg, #fff7ed 0%, #fafaf8 46%, #eef5f3 100%);
 }
 
 button,
@@ -65,9 +69,38 @@ button {
   cursor: pointer;
 }
 
+button,
+input,
+select,
+textarea {
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.22);
+  outline-offset: 2px;
+  border-color: rgba(37, 99, 235, 0.55);
+}
+
 .app {
   min-height: 100vh;
-  padding: env(safe-area-inset-top) 0 calc(88px + env(safe-area-inset-bottom));
+  padding: env(safe-area-inset-top) 0 calc(104px + env(safe-area-inset-bottom));
 }
 
 .topbar {
@@ -78,10 +111,10 @@ button {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 14px clamp(16px, 4vw, 36px);
-  background: rgba(255, 248, 239, 0.88);
-  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
-  backdrop-filter: blur(16px);
+  padding: 12px clamp(16px, 4vw, 36px);
+  background: rgba(255, 255, 255, 0.82);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.82);
+  backdrop-filter: blur(18px);
 }
 
 .brand {
@@ -98,10 +131,11 @@ button {
   height: 40px;
   place-items: center;
   border-radius: 8px;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), #f59e0b);
   color: white;
   font-size: 22px;
   font-weight: 800;
+  box-shadow: 0 10px 24px rgba(234, 88, 12, 0.28);
 }
 
 .brand-title {
@@ -179,9 +213,21 @@ button {
 }
 
 .today-photo {
+  position: relative;
   min-height: 260px;
+  background-color: #e8f1ee;
   background-position: center;
   background-size: cover;
+}
+
+.today-photo::after,
+.recipe-image::after,
+.dialog-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.04), transparent 45%, rgba(15, 23, 42, 0.1));
+  pointer-events: none;
 }
 
 .today-content {
@@ -217,7 +263,7 @@ button {
 .shopping-panel {
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
 }
 
@@ -236,11 +282,18 @@ button {
   width: 100%;
   min-height: 68px;
   padding: 14px;
-  border: 1px solid var(--line);
+  border: 1px solid #e7edf4;
   border-radius: 8px;
   background: #fff;
   color: var(--text);
   text-align: left;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
+.quick-button:hover {
+  border-color: rgba(234, 88, 12, 0.28);
+  background: #fffaf5;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
 }
 
 .quick-button strong {
@@ -271,17 +324,19 @@ button {
 
 .primary {
   padding: 12px 15px;
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), #f97316);
   color: white;
+  box-shadow: 0 10px 20px rgba(234, 88, 12, 0.22);
 }
 
 .primary.green {
-  background: var(--green);
+  background: linear-gradient(135deg, var(--green), #22c55e);
+  box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
 }
 
 .secondary {
   padding: 11px 14px;
-  background: var(--soft);
+  background: #fff7ed;
   color: var(--accent-dark);
   border-color: #fed7aa;
 }
@@ -291,6 +346,13 @@ button {
   background: #fff;
   color: var(--text);
   border-color: var(--line);
+}
+
+.ghost:hover,
+.secondary:hover,
+.icon-button:hover {
+  border-color: rgba(37, 99, 235, 0.24);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 .danger {
@@ -513,11 +575,22 @@ button {
   border-radius: 8px;
   background: var(--card);
   box-shadow: 0 12px 28px rgba(31, 41, 55, 0.08);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.recipe-card:hover {
+  border-color: rgba(234, 88, 12, 0.24);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .recipe-image {
   position: relative;
   height: 190px;
+  background-color: #edf4f1;
   background-position: center;
   background-size: cover;
 }
@@ -526,6 +599,7 @@ button {
   position: absolute;
   top: 10px;
   right: 10px;
+  z-index: 1;
   border: 0;
   width: 42px;
   height: 42px;
@@ -533,6 +607,23 @@ button {
   background: rgba(255, 255, 255, 0.92);
   color: #b45309;
   font-size: 20px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.16);
+}
+
+.quick-button:nth-child(1) {
+  border-left: 4px solid var(--accent);
+}
+
+.quick-button:nth-child(2) {
+  border-left: 4px solid var(--blue);
+}
+
+.quick-button:nth-child(3) {
+  border-left: 4px solid var(--green);
+}
+
+.quick-button:nth-child(4) {
+  border-left: 4px solid #db2777;
 }
 
 .recipe-body {
@@ -543,6 +634,7 @@ button {
   margin: 0 0 8px;
   font-size: 19px;
   line-height: 1.2;
+  letter-spacing: 0;
 }
 
 .recipe-card-description {
@@ -569,15 +661,17 @@ button {
 .meta span {
   padding: 5px 8px;
   border-radius: 999px;
-  background: #f9fafb;
+  background: #f8fafc;
+  color: #475467;
 }
 
 .filters-panel {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: 1.05fr 0.95fr 0.7fr 1.15fr 1.05fr auto;
+  align-items: end;
+  gap: 12px;
   margin: 14px 0 16px;
-  padding: 12px;
+  padding: 14px;
 }
 
 .field {
@@ -597,10 +691,17 @@ button {
   width: 100%;
   min-height: 44px;
   padding: 10px 11px;
-  border: 1px solid var(--line);
+  border: 1px solid #d8e0ea;
   border-radius: 8px;
   background: #fff;
   color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(15, 23, 42, 0.02);
+}
+
+.field input:hover,
+.field select:hover,
+.field textarea:hover {
+  border-color: #b8c5d6;
 }
 
 .field textarea {
@@ -610,11 +711,16 @@ button {
 
 .toggle-field {
   display: flex;
-  align-items: end;
+  align-items: center;
   gap: 8px;
-  padding-bottom: 8px;
+  min-height: 44px;
+  padding: 9px 11px;
+  border: 1px solid #d8e0ea;
+  border-radius: 8px;
+  background: #fff;
   color: var(--text);
   font-weight: 750;
+  white-space: nowrap;
 }
 
 .menu-actions,
@@ -624,7 +730,7 @@ button {
   gap: 8px;
   margin: 14px 0;
   overflow-x: auto;
-  padding-bottom: 4px;
+  padding-bottom: 8px;
   scrollbar-width: thin;
 }
 
@@ -636,6 +742,7 @@ button {
 
 .menu-panel {
   overflow: auto;
+  scrollbar-width: thin;
 }
 
 .menu-grid {
@@ -658,14 +765,14 @@ button {
   top: 0;
   z-index: 1;
   min-height: 54px;
-  background: #fff7ed;
+  background: #f8fafc;
   color: var(--accent-dark);
   font-weight: 850;
 }
 
 .meal-label {
-  background: #f9fafb;
-  color: var(--muted);
+  background: #f1f5f9;
+  color: #475467;
   font-weight: 850;
 }
 
@@ -676,6 +783,7 @@ button {
 
 .menu-title {
   font-weight: 800;
+  line-height: 1.25;
 }
 
 .menu-sub {
@@ -701,12 +809,21 @@ button {
   white-space: nowrap;
 }
 
+.small-controls button:hover {
+  border-color: rgba(234, 88, 12, 0.28);
+  background: #fff7ed;
+}
+
 .shopping-panel {
-  padding: 14px;
+  padding: 16px;
 }
 
 .shopping-category {
   margin-bottom: 16px;
+  padding: 12px;
+  border: 1px solid #edf2f7;
+  border-radius: 8px;
+  background: #fbfcfd;
 }
 
 .shopping-category h3 {
@@ -723,6 +840,10 @@ button {
   border-bottom: 1px solid var(--line);
 }
 
+.shopping-row:last-child {
+  border-bottom: 0;
+}
+
 .shopping-row.checked {
   color: var(--muted);
   text-decoration: line-through;
@@ -732,7 +853,7 @@ button {
   padding: 24px;
   border: 1px dashed #fdba74;
   border-radius: 8px;
-  background: rgba(255, 237, 213, 0.5);
+  background: rgba(255, 247, 237, 0.7);
   color: var(--muted);
   text-align: center;
 }
@@ -745,15 +866,16 @@ button {
   z-index: 30;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-  padding: 8px clamp(10px, 3vw, 26px) calc(8px + env(safe-area-inset-bottom));
-  background: rgba(255, 255, 255, 0.94);
+  gap: 8px;
+  padding: 10px clamp(12px, 3vw, 28px) calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.9);
   border-top: 1px solid var(--line);
-  backdrop-filter: blur(16px);
+  box-shadow: 0 -14px 40px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(18px);
 }
 
 .nav-button {
-  min-height: 54px;
+  min-height: 56px;
   flex-direction: column;
   gap: 2px;
   background: transparent;
@@ -762,14 +884,19 @@ button {
   font-size: 12px;
 }
 
+.nav-button:hover {
+  background: #f8fafc;
+}
+
 .nav-button .nav-icon {
   font-size: 21px;
   line-height: 1;
 }
 
 .nav-button.active {
-  background: var(--soft);
+  background: linear-gradient(180deg, #fff1e6, #fff8f0);
   color: var(--accent-dark);
+  box-shadow: inset 0 0 0 1px rgba(234, 88, 12, 0.1);
 }
 
 .dialog-backdrop {
@@ -808,14 +935,6 @@ button {
   max-height: 420px;
   background-position: center;
   background-size: cover;
-}
-
-.dialog-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(17, 24, 39, 0.18), transparent 34%, rgba(17, 24, 39, 0.1));
-  pointer-events: none;
 }
 
 .dialog-close-float {
@@ -866,7 +985,7 @@ button {
 
 .family-rating-card {
   padding: 12px;
-  border-radius: 18px;
+  border-radius: 8px;
   background: var(--app-surface);
   border: 1px solid var(--app-border-soft);
 }
@@ -945,7 +1064,7 @@ button {
 
 .cooking-history-card {
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 8px;
   background: var(--app-surface);
   border: 1px solid var(--app-border-soft);
   box-shadow: 0 6px 18px rgba(31, 41, 55, 0.05);
@@ -989,7 +1108,7 @@ button {
 
 .import-recipe-card {
   padding: 16px;
-  border-radius: 22px;
+  border-radius: 8px;
   background: var(--app-surface);
   border: 1px solid var(--app-border-soft);
   box-shadow: var(--app-shadow-card);
@@ -1014,7 +1133,7 @@ button {
   width: 100%;
   min-height: 48px;
   box-sizing: border-box;
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1px solid var(--app-border);
   background: #ffffff;
   padding: 0 14px;
@@ -1030,7 +1149,7 @@ button {
 
 .import-option-button {
   min-height: 52px;
-  border-radius: 16px;
+  border-radius: 8px;
   border: 1px solid var(--app-border-soft);
   background: #ffffff;
   display: flex;
@@ -1044,8 +1163,8 @@ button {
 
 .available-products-card {
   padding: 16px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, #f2faed 0%, #fffaf2 100%);
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f2faed 0%, #f8fafc 100%);
   border: 1px solid var(--app-border-soft);
 }
 
@@ -1061,7 +1180,7 @@ button {
   gap: 8px;
   align-items: center;
   padding: 8px;
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid var(--line);
 }
@@ -1088,7 +1207,7 @@ button {
   grid-template-columns: 72px 1fr;
   gap: 12px;
   padding: 10px;
-  border-radius: 18px;
+  border-radius: 8px;
   background: var(--app-surface);
   border: 1px solid var(--app-border-soft);
 }
@@ -1096,7 +1215,7 @@ button {
 .recipe-match-card__image {
   width: 72px;
   height: 72px;
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--app-primary-soft);
 }

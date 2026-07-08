@@ -491,11 +491,11 @@
           </div>
           <div class="loved-by">Любят: ${rating.topNames.length ? escapeHtml(rating.topNames.join(", ")) : "пока не оценили"}</div>
           ${renderPersonRatingChips(recipe.id)}
-          <div class="button-row">
+          <div class="button-row recipe-actions">
             <button class="primary green" data-open-recipe="${recipe.id}">Готовить</button>
             <button class="primary" data-open-recipe="${recipe.id}">Подробнее</button>
-            <button class="secondary" data-open-add-menu="${recipe.id}">В меню</button>
-            <button class="ghost" data-add-shopping="${recipe.id}">В покупки</button>
+            <button class="icon-button action-mini" data-open-add-menu="${recipe.id}" aria-label="Добавить в меню" title="В меню">＋</button>
+            <button class="icon-button action-mini" data-add-shopping="${recipe.id}" aria-label="Добавить ингредиенты в покупки" title="В покупки">✓</button>
           </div>
         </div>
       </article>
@@ -562,11 +562,11 @@
           <div class="menu-title">${escapeHtml(recipe ? recipe.title : "Рецепт удален")}</div>
           <div class="menu-sub">${entry.servings} порц.${entry.is_leftover ? " · осталось со вчера" : ""}</div>
           <div class="small-controls">
-            <button data-open-recipe="${entry.recipe_id}">Открыть</button>
-            <button data-add-slot="${date}|${mealType}">Заменить</button>
-            <button data-suggest-replace="${entry.id}">Не хочу</button>
-            <button data-leftover="${entry.id}">Осталось</button>
-            <button data-remove-menu="${entry.id}">Удалить</button>
+            <button data-open-recipe="${entry.recipe_id}" title="Открыть">Открыть</button>
+            <button data-add-slot="${date}|${mealType}" title="Заменить">↻</button>
+            <button data-suggest-replace="${entry.id}" title="Не хочу сегодня">?</button>
+            <button data-leftover="${entry.id}" title="Осталось на завтра">↷</button>
+            <button data-remove-menu="${entry.id}" title="Удалить">×</button>
           </div>
         </div>
       </div>

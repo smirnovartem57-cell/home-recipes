@@ -321,6 +321,10 @@ button {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 44px 44px;
   align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
 }
 
 .recipe-actions .primary {
@@ -332,6 +336,18 @@ button {
 
 .action-mini {
   flex: 0 0 44px;
+}
+
+.action-mini--menu {
+  background: #ecfdf5;
+  border-color: #bbf7d0;
+  color: #047857;
+}
+
+.action-mini--shopping {
+  background: #fff7ed;
+  border-color: #fed7aa;
+  color: var(--accent-dark);
 }
 
 .chips {
@@ -358,15 +374,15 @@ button {
 }
 
 .loved-by {
-  margin: 8px 0 0;
+  margin: 12px 0 0;
   color: var(--accent-dark);
   font-size: 13px;
   font-weight: 800;
 }
 
 .person-rating-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 10px;
 }
@@ -376,7 +392,9 @@ button {
   align-items: center;
   gap: 6px;
   min-height: 32px;
-  padding: 5px 10px;
+  justify-content: flex-start;
+  min-width: 0;
+  padding: 5px 9px;
   border-radius: 999px;
   background: #ffffff;
   border: 1px solid var(--app-border-soft);
@@ -397,6 +415,7 @@ button {
 }
 
 .person-chip__rating {
+  margin-left: auto;
   color: var(--app-primary);
   white-space: nowrap;
 }
@@ -515,7 +534,7 @@ button {
 }
 
 .recipe-body {
-  padding: 14px;
+  padding: 18px;
 }
 
 .recipe-body h3 {
@@ -1263,17 +1282,34 @@ button {
 
   .recipe-actions {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 42px 42px;
-    gap: 7px;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 12px;
   }
 
   .recipe-actions .primary {
     min-height: 42px;
+    padding-inline: 8px;
     font-size: 13px;
   }
 
   .recipe-actions .action-mini {
     width: 42px;
     height: 42px;
+  }
+
+  .recipe-body {
+    padding: 16px;
+  }
+
+  .person-rating-row {
+    gap: 7px;
+  }
+
+  .person-chip {
+    min-height: 34px;
+    padding: 5px 8px;
+    font-size: 12px;
   }
 
   .menu-actions,

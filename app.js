@@ -494,8 +494,8 @@
           <div class="button-row recipe-actions">
             <button class="primary green" data-open-recipe="${recipe.id}">Готовить</button>
             <button class="primary" data-open-recipe="${recipe.id}">Подробнее</button>
-            <button class="icon-button action-mini" data-open-add-menu="${recipe.id}" aria-label="Добавить в меню" title="В меню">＋</button>
-            <button class="icon-button action-mini" data-add-shopping="${recipe.id}" aria-label="Добавить ингредиенты в покупки" title="В покупки">✓</button>
+            <button class="icon-button action-mini action-mini--menu" data-open-add-menu="${recipe.id}" aria-label="Добавить в меню" title="В меню">＋</button>
+            <button class="icon-button action-mini action-mini--shopping" data-add-shopping="${recipe.id}" aria-label="Добавить ингредиенты в покупки" title="В покупки">✓</button>
           </div>
         </div>
       </article>

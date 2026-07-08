@@ -1,11 +1,14 @@
-const CACHE_NAME = "home-recipes-pwa-v4";
+const CACHE_NAME = "home-recipes-pwa-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./manifest.webmanifest",
-  "./icons/icon.svg"
+  "./icons/icon.svg",
+  "./icons/apple-touch-icon.png",
+  "./icons/recipe-icon-192.png",
+  "./icons/recipe-icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
